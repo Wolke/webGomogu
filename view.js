@@ -59,4 +59,12 @@ class GameView {
     showWinner(player) {
         alert(`遊戲結束！${player === 'black' ? '黑子' : '白子'}獲勝！`);
     }
+
+    disableBoard() {
+        this.piecesContainer.style.pointerEvents = 'none';
+    }
+
+    enableBoard() {
+        this.piecesContainer.style.pointerEvents = 'auto';
+    }
 }

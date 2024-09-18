@@ -9,13 +9,15 @@ class GameView {
     }
 
     createGridLines() {
-        for (let i = 0; i < 14; i++) {
+        for (let i = 0; i < 15; i++) {
             const verticalLine = document.createElement('div');
-            verticalLine.style.setProperty('--i', i);
+            verticalLine.classList.add('grid-line-vertical');
+            verticalLine.style.left = `${(100 / 14) * i}%`;
             this.gridLines.appendChild(verticalLine);
 
             const horizontalLine = document.createElement('div');
-            horizontalLine.style.setProperty('--i', i);
+            horizontalLine.classList.add('grid-line-horizontal');
+            horizontalLine.style.top = `${(100 / 14) * i}%`;
             this.gridLines.appendChild(horizontalLine);
         }
     }

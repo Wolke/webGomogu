@@ -37,9 +37,6 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: repeat(14, 1fr);
 }
 
 #grid-lines::before,
@@ -49,18 +46,22 @@ body {
     background-color: #000;
 }
 
-#grid-lines::before {
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    left: calc((100% - 1px) / 14 * var(--i));
+.grid-line-vertical,
+.grid-line-horizontal {
+    position: absolute;
+    background-color: #000;
 }
 
-#grid-lines::after {
+.grid-line-vertical {
+    width: 1px;
+    top: 0;
+    bottom: 0;
+}
+
+.grid-line-horizontal {
+    height: 1px;
     left: 0;
     right: 0;
-    height: 1px;
-    top: calc((100% - 1px) / 14 * var(--i));
 }
 
 #pieces {

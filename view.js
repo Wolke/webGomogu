@@ -1,12 +1,27 @@
 class GameView {
     constructor() {
         this.gameBoard = document.getElementById('game-board');
+        this.piecesContainer = document.getElementById('pieces');
+        this.gridLines = document.getElementById('grid-lines');
         this.currentPlayerDisplay = document.getElementById('current-player');
         this.resetButton = document.getElementById('reset-btn');
+        this.createGridLines();
+    }
+
+    createGridLines() {
+        for (let i = 0; i < 14; i++) {
+            const verticalLine = document.createElement('div');
+            verticalLine.style.setProperty('--i', i);
+            this.gridLines.appendChild(verticalLine);
+
+            const horizontalLine = document.createElement('div');
+            horizontalLine.style.setProperty('--i', i);
+            this.gridLines.appendChild(horizontalLine);
+        }
     }
 
     renderBoard(board) {
-        this.gameBoard.innerHTML = '';
+        this.piecesContainer.innerHTML = '';
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[i].length; j++) {
                 const cell = document.createElement('div');
@@ -16,7 +31,7 @@ class GameView {
                 if (board[i][j]) {
                     cell.classList.add(board[i][j]);
                 }
-                this.gameBoard.appendChild(cell);
+                this.piecesContainer.appendChild(cell);
             }
         }
     }

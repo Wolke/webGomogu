@@ -1,6 +1,6 @@
 class GameModel {
     constructor() {
-        this.boardSize = 15;
+        this.boardSize = 15;  // 改為 15x15 的棋盤
         this.board = Array(this.boardSize).fill().map(() => Array(this.boardSize).fill(null));
         this.currentPlayer = 'black';
     }

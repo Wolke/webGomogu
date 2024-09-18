@@ -66,10 +66,10 @@ body {
 
 #pieces {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -3.5%;
+    left: -3.5%;
+    right: -3.5%;
+    bottom: -3.5%;
     display: grid;
     grid-template-columns: repeat(15, 1fr);
     grid-template-rows: repeat(15, 1fr);
@@ -85,8 +85,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     transition: background-color 0.3s;

@@ -5,6 +5,7 @@ class GameView {
         this.gridLines = document.getElementById('grid-lines');
         this.currentPlayerDisplay = document.getElementById('current-player');
         this.resetButton = document.getElementById('reset-btn');
+        this.modeButtons = document.querySelectorAll('.mode-btn');
         this.createGridLines();
     }
 
@@ -54,6 +55,26 @@ class GameView {
 
     bindResetButton(handler) {
         this.resetButton.addEventListener('click', handler);
+    }
+
+    bindModeSelection(handler) {
+        this.modeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const mode = button.dataset.mode;
+                handler(mode);
+                this.updateModeButtons(mode);
+            });
+        });
+    }
+
+    updateModeButtons(selectedMode) {
+        this.modeButtons.forEach(button => {
+            if (button.dataset.mode === selectedMode) {
+                button.classList.add('selected');
+            } else {
+                button.classList.remove('selected');
+            }
+        });
     }
 
     showWinner(player) {

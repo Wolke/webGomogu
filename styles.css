@@ -124,6 +124,30 @@ body {
     background-color: #45a049;
 }
 
+#game-mode-selection {
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    padding: 10px 15px;
+    margin: 0 5px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.mode-btn:hover {
+    background-color: #45a049;
+}
+
+.mode-btn.selected {
+    background-color: #357a38;
+}
+
 @media (max-width: 600px) {
     h1 {
         font-size: 24px;

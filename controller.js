@@ -4,15 +4,25 @@ class GameController {
         this.view = view;
         this.ai = ai;
         this.isAITurn = false;
+        this.gameMode = 'human-vs-human';
 
         this.view.bindCellClick(this.handleCellClick.bind(this));
         this.view.bindResetButton(this.handleReset.bind(this));
+        this.view.bindModeSelection(this.handleModeSelection.bind(this));
 
         this.updateView();
     }
 
+    handleModeSelection(mode) {
+        this.gameMode = mode;
+        this.handleReset();
+        if (mode === 'ai-black' || mode === 'ai-vs-ai') {
+            this.makeAIMove();
+        }
+    }
+
     handleCellClick(row, col) {
-        if (this.isAITurn) return; // 如果是 AI 的回合，忽略玩家的點擊
+        if (this.isAITurn) return;
 
         if (this.model.makeMove(row, col)) {
             this.updateView();
@@ -20,14 +30,24 @@ class GameController {
                 this.view.showWinner(this.model.currentPlayer === 'black' ? 'white' : 'black');
                 this.handleReset();
             } else {
-                this.makeAIMove();
+                this.checkAITurn();
             }
+        }
+    }
+
+    checkAITurn() {
+        if (
+            (this.gameMode === 'ai-black' && this.model.currentPlayer === 'black') ||
+            (this.gameMode === 'ai-white' && this.model.currentPlayer === 'white') ||
+            this.gameMode === 'ai-vs-ai'
+        ) {
+            this.makeAIMove();
         }
     }
 
     makeAIMove() {
         this.isAITurn = true;
-        this.view.disableBoard(); // 禁用棋盤
+        this.view.disableBoard();
 
         const aiMove = this.ai.makeMove();
         if (aiMove) {
@@ -37,14 +57,16 @@ class GameController {
                     if (this.model.checkWin(aiMove.row, aiMove.col)) {
                         this.view.showWinner(this.model.currentPlayer === 'black' ? 'white' : 'black');
                         this.handleReset();
+                    } else if (this.gameMode === 'ai-vs-ai') {
+                        this.makeAIMove();
                     }
                 }
                 this.isAITurn = false;
-                this.view.enableBoard(); // 重新啟用棋盤
+                this.view.enableBoard();
             }, 500);
         } else {
             this.isAITurn = false;
-            this.view.enableBoard(); // 重新啟用棋盤
+            this.view.enableBoard();
         }
     }
 
@@ -53,6 +75,9 @@ class GameController {
         this.isAITurn = false;
         this.view.enableBoard();
         this.updateView();
+        if (this.gameMode === 'ai-black' || this.gameMode === 'ai-vs-ai') {
+            this.makeAIMove();
+        }
     }
 
     updateView() {
